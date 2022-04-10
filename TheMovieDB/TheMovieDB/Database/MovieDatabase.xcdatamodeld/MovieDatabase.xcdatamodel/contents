@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EntityCompany" representedClassName="EntityCompany" syncable="YES" codeGenerationType="class">
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="logoPath" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="EntityFavor" representedClassName="EntityFavor" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="EntityMovie" representedClassName="EntityMovie" syncable="YES" codeGenerationType="class">
+        <attribute name="favor" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="movieDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityMovieDetails"/>
+    </entity>
+    <entity name="EntityMovieDetails" representedClassName="EntityMovieDetails" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="posterPath" optional="YES" attributeType="String"/>
+        <relationship name="productionCompany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityCompany"/>
+    </entity>
+    <entity name="EntityUser" representedClassName="EntityUser" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="EntityCompany" positionX="-36" positionY="9" width="128" height="89"/>
+        <element name="EntityMovie" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="EntityMovieDetails" positionX="-54" positionY="-9" width="128" height="89"/>
+        <element name="EntityUser" positionX="-36" positionY="36" width="128" height="44"/>
+        <element name="EntityFavor" positionX="-36" positionY="45" width="128" height="59"/>
+    </elements>
+</model>
