@@ -86,7 +86,7 @@ class DetailsViewController: UIViewController{
         if let navigation = self.navigationController{
             navigation.isNavigationBarHidden = false
             navigation.navigationBar.topItem?.title = detailViewModel.movieData.title
-            navigation.navigationItem.hidesBackButton = true
+            //navigation.navigationItem.hidesBackButton = true
             navigation.navigationBar.topItem?.backButtonTitle = "Movies"
             let switcher = UISwitch()
             switcher.addTarget(self, action: #selector(switchFavor(sender:)), for: .valueChanged)

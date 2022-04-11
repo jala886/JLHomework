@@ -77,14 +77,14 @@ class MainViewController: UIViewController{
     // MARK: - DEFINED FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Movies"
         // Do any additional setup after loading the view.
         try! configure()
         setupUI()
         
-        
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "Movies"
+//        self.navigationController?.navigationBar.topItem?.title = "Movies"
         self.navigationController?.isNavigationBarHidden = true
         tableView?.searcher.searchBar.isHidden = false
         let name = UserDefaults.standard.string(forKey: userNameSaveKey)

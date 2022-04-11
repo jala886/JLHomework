@@ -54,7 +54,8 @@ class MovieViewModel{
         }
     }
     private func updateImageData(){
-        var tempImageData = [Int:Data]()
+        //var tempImageData = [Int:Data]()
+        var tempImageData = posterData
         let group = DispatchGroup()
         for movie in movieData{
             if posterData[movie.id] == nil,let posterPath = movie.posterPath{
