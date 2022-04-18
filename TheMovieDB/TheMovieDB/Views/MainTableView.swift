@@ -51,6 +51,8 @@ class MainTableView:UITableView{
     }()
     
     private func setupUI(){
+        self.accessibilityActivate()
+        self.accessibilityIdentifier = "Main.Table.View"
         //backgroundColor = .blue
         //let searcher = UISearchController(searchResultsController: nil)
         //searcher.searchResultsUpdater = self

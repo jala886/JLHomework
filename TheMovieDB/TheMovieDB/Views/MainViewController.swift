@@ -97,6 +97,9 @@ class MainViewController: UIViewController{
             print(NormError.userNameError("user not save in UserDefaults"))
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.topItem?.title = "Movies"
+    }
     private func configure() throws{
         ConfigureMVVM.configure(self)
        
