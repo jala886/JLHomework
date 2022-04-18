@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailsViewController: UIViewController{
     static let identiferCell = "CollectionCell"
@@ -99,16 +100,42 @@ class DetailsViewController: UIViewController{
 
         
     }
-
+    
     private func configure(){
         //self.detailViewModel.loadData(detailVC:self)
-        parentView?.viewModel.repository.getMovieDetailsData(detailViewModel.movieData.id){ [weak self] data in
+        // check is in the core data
+        //detailViewModel.configureData{}
+        let data = detailViewModel.movieData
+        let context = parentView?.viewModel.repository.context;
+        let fetchRequest = EntityMovieDetails.fetchRequest()
+        do{
+            fetchRequest.predicate = NSPredicate(format:"id=%d",data.id)
+            let fetchResult = try context!.fetch(fetchRequest)
+            if fetchResult.count != 0{
+                
+            }else{
+                downloadData(id: data.id)
+//                let desc = NSEntityDescription.entity(forEntityName: "EntityMovieDetails", in: context!)
+//                let entity = EntityMovieDetails(entity: desc!, insertInto: context)
+//                entity.setValue(data.id, forKey: "id")
+//                entity.setValue(data.title, forKey: "title")
+//                entity.setValue(data.overview, forKey: "overView")
+                //try context?.save()
+            }
+        }catch(let e){
+            print(e.localizedDescription)
+        }
+    }
+    private func downloadData(id:Int){
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        parentView?.viewModel.repository.getMovieDetailsData(id){ [weak self] data in
             if let self = self{
                 DispatchQueue.main.async {
                     self.titleLabel.text = data.title
                     self.detailsLabel.text = data.overview
                     if let path = data.posterPath{
-                    //self.configurePoster()
+                        //self.configurePoster()
                         self.parentView?.viewModel.repository.getPosterData(from:NetworkURL.imageURL(ImageSize.w342,path)){[weak self] result in
                             switch result{
                             case .failure(let e):
@@ -124,8 +151,14 @@ class DetailsViewController: UIViewController{
                     // update companies
                     self.detailViewModel.updateCompanyData(detailData: data,self)
                     self.collection.reloadData()
+                    // semaphore
+                    
+                    
                 }
+                semaphore.signal()
             }}
+        _ = semaphore.wait(timeout:.distantFuture)
+        // save data
     }
     
     private func setupUI(){

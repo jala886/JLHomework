@@ -12,7 +12,7 @@ import CoreData
 class Repository{
 
     
-    private lazy var context = MovieCoreData.context
+    lazy var context = MovieCoreData.context
     private var page = 1
     private let networkManager:NetworkManager
     private var subscribers = Set<AnyCancellable>()
